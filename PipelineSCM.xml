@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('GitHub') {
+            steps {
+                echo 'Source Code from our GitHub'
+				git branch: 'main', url: 'https://github.com/DevSecOpsEasy/Resources.git' 
+            }
+        }
+		
+		stage('Build') {
+            steps {
+                echo 'Building the code with Maven'
+				sh 'mvn clean install'
+            }
+        }
+		
+		stage('Deploy') {
+            steps {
+                echo 'Deploy .war file to our Tomcat Server'
+				deploy adapters: [tomcat9(credentialsId: 'd3ca4e95-0220-42f3-973e-23c4347d5371', path: '', url: 'http://35.175.218.103:8081/')], contextPath: null, war: '**/*.war'
+            }
+        }
+    }
+}
