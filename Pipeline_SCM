@@ -5,7 +5,7 @@ pipeline {
         stage('GitHub') {
             steps {
                 echo 'Source Code from our GitHub'
-				git branch: 'main', url: 'https://github.com/DevSecOpsEasy/Resources.git' 
+				git branch: 'main', url: 'https://github.com/Sunny2904/Resources.git'
             }
         }
 		
